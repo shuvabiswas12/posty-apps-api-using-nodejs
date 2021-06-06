@@ -7,7 +7,12 @@ exports.auth = async function (req, res, next) {
     const user = await User.findOne({ rememberToken: jwtToken }, { _id: 1, name: 1, username: 1 })
 
     /** this returns me an object like {_id, iat, exp}  */
-    const verifiedUser = jwt.verify(jwtToken, process.env.SECRET_KEY)
+    let verifiedUser
+    try {
+      verifiedUser = await jwt.verify(jwtToken, process.env.SECRET_KEY)
+    } catch (err) {
+      return res.status(400).send({ errorName: "TokenExpiredError", message: "Jwt Expired." })
+    }
 
     if (verifiedUser._id == user._id) {
       // store the userID

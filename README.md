@@ -27,3 +27,11 @@
 "For add a post to database"
 
 # /post
+
+"For like a post"
+
+# /posts/:post_id/like
+
+"For unlike a post"
+
+# /posts/:post_id/unlike

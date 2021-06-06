@@ -1,5 +1,5 @@
 const User = require("../models/User")
-const validator = require("validator")
+const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 
 exports.login = function (req, res) {
@@ -40,7 +40,12 @@ exports.login = function (req, res) {
 
       let token = ""
       if (user.rememberToken) {
-        token = user.rememberToken
+        try {
+          let verifiedToken = await jwt.verify(user.rememberToken, process.env.SECRET_KEY)
+          token = user.rememberToken
+        } catch (err) {
+          token = await user.generateAuthToken()
+        }
       } else token = await user.generateAuthToken()
 
       res.cookie("jwtToken", token, {

@@ -43,10 +43,40 @@ exports.getAllPostByUser = function (req, res) {
 }
 
 exports.getAllPosts = function (req, res) {
-  Post.find({}, function (err, data) {
-    if (err) {
+  /**
+   * $unset is used for excluding the collection's field like password, email etc.
+   * $unwind is used for converting an array to object
+   *
+   */
+  Post.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    {
+      $unwind: "$user",
+    },
+    {
+      $unset: ["user.password", "user.rememberToken", "user.createdAt", "user.updatedAt", "user.email"],
+    },
+    {
+      $lookup: {
+        from: "likes",
+        localField: "_id",
+        foreignField: "post",
+        as: "likes",
+      },
+    },
+  ])
+    .then((data) => {
+      return res.status(200).send(data)
+    })
+    .catch((err) => {
+      console.log(err)
       return res.status(400).send(err)
-    }
-    return res.status(200).send(data)
-  })
+    })
 }

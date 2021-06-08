@@ -1,5 +1,5 @@
-"No need to pass JWToken during a request. It takes automatically."
-"First of all look inside the .env file. Put there secret key and connection string of DB. After inserting these two stuffs you can able to run the apis properly."
+#No need to pass JWToken during a request. It takes automatically.
+#First of all look inside the .env file. Put there secret key and connection string of DB. After inserting these two stuffs you can able to run the apis properly.
 
 # Here are the api endpoints given bellow:-
 

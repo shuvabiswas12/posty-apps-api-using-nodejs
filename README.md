@@ -12,6 +12,9 @@
 
 # /register
 
+"For fetching all user"
+#/users
+
 "For fetching all post based on a user id"
 
 # /:user_id/posts

@@ -10,6 +10,6 @@ mongoose
   })
   .then(() => console.log("Db connection successful!"))
   .catch((e) => {
-    console.log("Db connection failed! Check the error!")
+    console.log("Db connection failed! Make sure you enter correct connection string!")
     console.log(e)
   })

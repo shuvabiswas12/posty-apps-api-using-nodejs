@@ -26,3 +26,14 @@ exports.saveUserRegistrations = function (req, res) {
     })
     .catch((err) => console.log(err))
 }
+
+exports.getAllUser = function (req, res) {
+  User.find({})
+    .select("-password -rememberToken -__v")
+    .then((users) => {
+      return res.status(200).send(users)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}

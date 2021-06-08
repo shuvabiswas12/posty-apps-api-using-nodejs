@@ -15,6 +15,9 @@ apiRouter.post("/register", registrationController.saveUserRegistrations)
 apiRouter.post("/login", loginController.login)
 apiRouter.post("/logout", auth.auth, logoutController.logout)
 
+// get all user
+apiRouter.get("/users", registrationController.getAllUser)
+
 // the route is regarding to post and delete post
 apiRouter.post("/post", auth.auth, postController.savePost)
 apiRouter.post("/:post_id/delete", postController.deleteOnePost)

@@ -16,7 +16,7 @@
 # /register
 
 "For fetching all user"
-#/users
+# /users
 
 "For fetching all post based on a user id"
 

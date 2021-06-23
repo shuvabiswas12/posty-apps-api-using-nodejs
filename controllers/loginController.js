@@ -48,15 +48,10 @@ exports.login = function (req, res) {
         }
       } else token = await user.generateAuthToken()
 
-      res.cookie("jwtToken", token, {
-        /**
-         * expiration value 2592000000 means 30 days.
-         * that means 30 days = 2592000000 milliseconds
-         */
-        expires: new Date(Date.now() + 2592000000),
-        httpOnly: true,
-      })
-      res.status(201).send({ message: "User signed in successfully.", token })
+      let username = user.username
+      let userId = user._id
+
+      res.status(200).send({ message: "User signed in successfully.", token, username, userId })
     })
     .catch((err) => console.log(err))
 }

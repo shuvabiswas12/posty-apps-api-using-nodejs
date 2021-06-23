@@ -1,13 +1,17 @@
 const express = require("express")
 const dotenv = require("dotenv")
-const cookieParser = require("cookie-parser")
-const cors = require("cors")
 
 dotenv.config()
 const app = express()
-app.use(cors())
 
 require("./db")
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-with, Content-Type, Accept, Authorization")
+  res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE, OPTIONS")
+  next()
+})
 
 /**
  * "express.urlencoded({ extended: false })"  => just tell the express to add
@@ -18,8 +22,6 @@ require("./db")
 app.use(express.urlencoded({ extended: false }))
 
 app.use(express.json()) // works on sending json data
-
-app.use(cookieParser())
 
 const PORT = process.env.PORT || 3000
 

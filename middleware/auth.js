@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken")
 const User = require("../models/User")
 
 exports.auth = async function (req, res, next) {
-  const jwtToken = req.cookies.jwtToken
+  const jwtToken = req.headers.authorization
   if (jwtToken) {
     const user = await User.findOne({ rememberToken: jwtToken }, { _id: 1, name: 1, username: 1 })
 

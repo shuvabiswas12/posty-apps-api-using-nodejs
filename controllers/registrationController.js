@@ -2,8 +2,6 @@ const User = require("../models/User")
 const { handlingErrors } = require("./errorHandler")
 
 exports.saveUserRegistrations = function (req, res) {
-  console.log("Came to register")
-
   const { name, username, email, password, confirmPassword } = req.body
 
   /**

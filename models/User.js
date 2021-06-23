@@ -64,6 +64,11 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.generateAuthToken = async function () {
   try {
+    /**
+     * expiration value 2592000000 means 30 days.
+     * that means 30 days = 2592000000 milliseconds
+     */
+
     let generatedToken = jwt.sign({ _id: this._id }, process.env.SECRET_KEY, { expiresIn: 60 * 60 })
     this.rememberToken = generatedToken
     this.save()
